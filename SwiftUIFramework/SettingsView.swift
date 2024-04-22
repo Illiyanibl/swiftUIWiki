@@ -14,10 +14,12 @@ struct SettingsView: View {
     @State private var textSize: Double = 5
     var body: some View {
         Form {
-            Text("Settings")
-                .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
-                .bold()
-                .padding()
+            Section{
+                Text("Settings")
+                    .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
+                    .bold()
+                    .padding()
+            }
             Section{
                 Text("Main Settings:")
                     .font(.title2)
@@ -32,6 +34,7 @@ struct SettingsView: View {
             Section {
                 Text("Other Settings:")
                     .font(.title2)
+                Text("Text size:")
                 Slider(value: $textSize, in: 0...10)
 
             }
