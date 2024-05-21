@@ -20,7 +20,7 @@ struct InfoRow: View {
             Text(post.title)
                 .font(.title)
             Spacer()
-
+            
         }
         .padding()
     }

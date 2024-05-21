@@ -9,11 +9,14 @@ import SwiftUI
 
 struct InfoDetails: View {
     var post: Post
+    var titleOn: Bool
     var body: some View {
         VStack{
-            Text(post.title)
-                .font(.title)
-                .bold()
+            if titleOn {
+                Text(post.title)
+                    .font(.title)
+                    .bold()
+            }
             HStack{
                 Image(systemName: post.image)
                     .scaledToFill()
@@ -31,8 +34,4 @@ struct InfoDetails: View {
         }
         .padding()
     }
-}
-
-#Preview {
-    InfoDetails(post: PostModel.postCollection[0])
 }

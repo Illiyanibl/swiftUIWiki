@@ -10,11 +10,13 @@ import SwiftData
 
 struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
+    //@State private var titleOn: Bool = true
+    @AppStorage("titleOn") var titleOn: Bool = true
     @Query private var items: [Item]
-
+    
     var body: some View {
         TabView {
-            InfoView()
+            InfoView(titleOn: titleOn)
                 .tabItem {
                     Label(
                         title: { Text("InfoView") },
@@ -27,14 +29,17 @@ struct ContentView: View {
                         title: { Text("Hello")},
                         icon: { Image(systemName: "hand.wave.fill")})
                 }
-
-            SettingsView()
+            
+            SettingsView(titleOn: $titleOn)
                 .tabItem {
                     Label(
                         title: { Text("Settings") },
                         icon: { Image(systemName: "slider.horizontal.3")})
                 }
         }
+    }
+    init(){
+        PostModel.setupPostCollection()
     }
 }
 

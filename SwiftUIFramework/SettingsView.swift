@@ -8,20 +8,27 @@
 import SwiftUI
 
 struct SettingsView: View {
+    @Environment(\.colorScheme) var colorScheme
+    @Binding var titleOn: Bool
     var colors = ["Red", "Green", "Blue", "Tartan"]
     @State private var selectedColor = "Red"
-    @State private var toggle = true
     @State private var textSize: Double = 5
     var body: some View {
         Form {
-            Text("Settings")
-                .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
-                .bold()
-                .padding()
+            Section{
+                Text("Settings")
+                    .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
+                    .bold()
+                    .padding()
+                colorScheme == .light ?
+                Text("Light Theme enabled") :
+                Text("Dark Theme enabled")
+            }
             Section{
                 Text("Main Settings:")
                     .font(.title2)
-                Toggle("Toggle", isOn: $toggle)
+                Toggle("Заголовка списка", isOn: $titleOn)
+                if titleOn { Text("Navigation title enabled") }
                 Picker("Color", selection: $selectedColor) {
                     ForEach(colors, id: \.self) {
                         Text($0)
@@ -32,6 +39,7 @@ struct SettingsView: View {
             Section {
                 Text("Other Settings:")
                     .font(.title2)
+                Text("Text size:")
                 Slider(value: $textSize, in: 0...10)
 
             }
@@ -39,7 +47,8 @@ struct SettingsView: View {
         }
     }
 }
-
-#Preview {
-    SettingsView()
-}
+/*
+ #Preview {
+ SettingsView(titleOn: $)
+ }
+ */
